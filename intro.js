@@ -120,9 +120,10 @@
 
     } else {
       //use steps from data-* annotations
-      var allIntroSteps = targetElm.querySelectorAll('*[data-intro]');
+      var allIntroSteps = [targetElm.querySelector('*[data-intro]')];
+
       //if there's no element to intro
-      if (allIntroSteps.length < 1) {
+      if (allIntroSteps.length < 1 || !allIntroSteps[0]) {
         return false;
       }
 
@@ -1015,7 +1016,7 @@
 
     var parentElm = targetElement.element.parentNode;
     while (parentElm != null) {
-      if (parentElm.tagName.toLowerCase() === 'body') break;
+      if (!parentElm.tagName || parentElm.tagName.toLowerCase() === 'body') break;
 
       //fix The Stacking Contenxt problem.
       //More detail: https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Understanding_z_index/The_stacking_context
@@ -1087,7 +1088,7 @@
   function _isFixed(element) {
     var p = element.parentNode;
 
-    if (p.nodeName === 'HTML') {
+    if (!p || p.nodeName === 'HTML') {
       return false;
     }
 
@@ -1150,7 +1151,7 @@
     overlayLayer.className = 'introjs-overlay';
 
     //check if the target element is body, we should calculate the size of overlay layer in a better way
-    if (targetElm.tagName.toLowerCase() === 'body') {
+    if (!targetElm.tagName || targetElm.tagName.toLowerCase() === 'body') {
       styleText += 'top: 0;bottom: 0; left: 0;right: 0;position: fixed;';
       overlayLayer.setAttribute('style', styleText);
     } else {
