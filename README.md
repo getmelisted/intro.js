@@ -1,5 +1,7 @@
 # Intro.js v2.0
 
+# Forked so it can be used with web components (Polymer + shadow dom)
+
 > Better introductions for websites and features with a step-by-step guide for your projects.
 
 ## Where to get
